@@ -17,10 +17,26 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="300" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Name="AddAccountButton" Grid.Column="2" Content="Add Account" />
+            <Button
+                Name="ChangeMasterPassword"
+                Grid.Column="0"
+                Content="Change Master Password"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="18" />
+            <Button
+                Name="AddAccountButton"
+                Grid.Column="1"
+                Content="Add Account"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="18" />
         </Grid>
         <Grid Grid.Row="1" Name="LoginGrid" />
     </Grid>

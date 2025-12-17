@@ -9,6 +9,8 @@ namespace LeagueLogin;
 /// </summary>
 public partial class App : Application
 {
-    public static AccountManager accountManager = new AccountManager();
+    public static string? master_password = null;
+    public static AccountManager.AccountManager accountManager = new();
+
 }
 

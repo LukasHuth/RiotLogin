@@ -27,15 +27,31 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        MasterPassword mp = new MasterPassword();
+        if (!(mp.ShowDialog()??false))
+        {
+            Close();
+        }
+        App.master_password = mp.MasterPasswordText;
+        
         InitializeComponent();
         
-        AddAccountButton.Click += (sender, args) =>
+        AddAccountButton.Click += (_, _) =>
         {
             Add_Account add_account_dialog = new Add_Account();
             if (add_account_dialog.ShowDialog() ?? false == true)
             {
                 App.accountManager.addAccount(add_account_dialog.alias, add_account_dialog.username, add_account_dialog.password);
                 rerender();
+            }
+        };
+        ChangeMasterPassword.Click += (_, _) =>
+        {
+            MasterPassword master_password = new MasterPassword();
+            if (master_password.ShowDialog() ?? false)
+            {
+                App.accountManager.changeMasterPassword(master_password.MasterPasswordText);
+                App.master_password = master_password.MasterPasswordText;
             }
         };
         populate_accounts();
@@ -85,7 +101,7 @@ public partial class MainWindow : Window
             Background = Brushes.White,
             BorderBrush = Brushes.White,
         };
-        delete_entry_button.Click += (sender, args) =>
+        delete_entry_button.Click += (_, _) =>
         {
             App.accountManager.removeAccount(data.name);
             rerender();
@@ -136,7 +152,7 @@ public partial class MainWindow : Window
             Thread.Sleep(5000);
         }
         IntPtr hWnd = process.MainWindowHandle;
-        AccountManager.AccountData? account_data = App.accountManager.getAccount(alias);
+        AccountManager.AccountManager.AccountData? account_data = App.accountManager.getAccount(alias);
         if (account_data == null) return;
         if (hWnd != IntPtr.Zero)
         {
